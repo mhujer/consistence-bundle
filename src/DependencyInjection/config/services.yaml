@@ -1,0 +1,7 @@
+services:
+    mhujer_consistence.enum.enum_translator:
+        class: Mhujer\ConsistenceBundle\Enum\EnumTranslator
+        arguments:
+            $translator: '@translator.default'
+
+    Mhujer\ConsistenceBundle\Enum\EnumTranslator: '@mhujer_consistence.enum.enum_translator'

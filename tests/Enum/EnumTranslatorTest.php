@@ -4,15 +4,18 @@ namespace Mhujer\ConsistenceBundle\Enum;
 
 use Mhujer\ConsistenceBundle\Fixtures\CardColor;
 use Mhujer\ConsistenceBundle\Fixtures\RolesEnum;
-use Symfony\Component\Translation\Translator;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class EnumTranslatorTest extends \PHPUnit\Framework\TestCase
 {
 
     public function testTranslateEnum(): void
     {
-        $dummyTranslator = new Translator(null);
-        $enumTranslator = new EnumTranslator($dummyTranslator);
+        $mockTranslator = $this->createMock(TranslatorInterface::class);
+        $mockTranslator->method('trans')
+            ->willReturnArgument(0);
+
+        $enumTranslator = new EnumTranslator($mockTranslator);
 
         self::assertSame(
             'Mhujer\ConsistenceBundle\Fixtures\CardColor:red',
@@ -26,7 +29,9 @@ class EnumTranslatorTest extends \PHPUnit\Framework\TestCase
 
     public function testTranslateEnumWithMultiEnumThrowsException(): void
     {
-        $enumTranslator = new EnumTranslator(new Translator(null));
+        $mockTranslator = $this->createMock(TranslatorInterface::class);
+
+        $enumTranslator = new EnumTranslator($mockTranslator);
 
         $this->expectException(\Throwable::class);
         $this->expectExceptionMessage('Only single enums are supported for now.');

@@ -4,12 +4,12 @@ namespace Mhujer\ConsistenceBundle\Enum;
 
 use Consistence\Enum\Enum;
 use Consistence\Enum\MultiEnum;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class EnumTranslator
 {
 
-    /** @var \Symfony\Component\Translation\TranslatorInterface */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     private $translator;
 
     public function __construct(
