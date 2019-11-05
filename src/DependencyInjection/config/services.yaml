@@ -2,14 +2,20 @@ services:
     mhujer_consistence.enum.enum_translator:
         class: Mhujer\ConsistenceBundle\Enum\EnumTranslator
         arguments:
-            $translator: '@translator.default'
+            $translator: '@translator'
 
     Mhujer\ConsistenceBundle\Enum\EnumTranslator: '@mhujer_consistence.enum.enum_translator'
 
     mhujer_consistence.twig.enum_translator_extension:
         class: Mhujer\ConsistenceBundle\Twig\EnumTranslatorExtension
         public: false
+        tags:
+            - { name: twig.extension }
+
+    mhujer_consistence.twig.enum_translator_runtime:
+        class: Mhujer\ConsistenceBundle\Twig\EnumTranslatorRuntime
+        public: false
         arguments:
             $enumTranslator: '@mhujer_consistence.enum.enum_translator'
         tags:
-            - { name: twig.extension }
+            - { name: twig.runtime }
