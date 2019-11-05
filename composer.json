@@ -1,0 +1,60 @@
+{
+	"name": "mhujer/consistence-bundle",
+	"description": "Add translator and form elements for enums from consistence/consistence",
+	"type": "symfony-bundle",
+	"keywords": [
+		"symfony",
+		"enum",
+		"enums",
+		"consistence"
+	],
+	"license": "MIT",
+	"homepage": "https://github.com/mhujer/consistence-bundle",
+	"authors": [
+		{
+			"name": "Martin Hujer",
+			"email": "mail@martinhujer.cz",
+			"homepage": "https://www.martinhujer.cz"
+		}
+	],
+	"require": {
+		"php": "~7.2",
+		"consistence/consistence": "~2.0",
+		"symfony/config": "~4.3 || ~5.0",
+		"symfony/dependency-injection": "~4.3 || ~5.0",
+		"symfony/http-kernel": "~4.3 || ~5.0",
+		"symfony/translation": "~4.3 || ~5.0",
+		"symfony/yaml": "~4.3 || ~5.0"
+	},
+	"require-dev": {
+		"consistence/coding-standard": "3.8",
+		"php-coveralls/php-coveralls": "^2.1",
+		"phpstan/phpstan-shim": "^0.11.19",
+		"phpunit/phpunit": "8.4.2"
+	},
+	"autoload": {
+		"psr-4": {
+			"Mhujer\\ConsistenceBundle\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Mhujer\\ConsistenceBundle\\": "tests/"
+		}
+	},
+	"config": {
+		"sort-packages": true
+	},
+	"scripts": {
+		"build": [
+			"@composer validate --strict",
+			"@cs",
+			"@phpstan",
+			"@test"
+		],
+		"cs": "phpcs src tests",
+		"cbf": "phpcbf src tests",
+		"phpstan": "phpstan analyse src tests --level=7 --no-progress",
+		"test": "phpunit"
+	}
+}
