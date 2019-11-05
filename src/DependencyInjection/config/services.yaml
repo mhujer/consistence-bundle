@@ -5,3 +5,11 @@ services:
             $translator: '@translator.default'
 
     Mhujer\ConsistenceBundle\Enum\EnumTranslator: '@mhujer_consistence.enum.enum_translator'
+
+    mhujer_consistence.twig.enum_translator_extension:
+        class: Mhujer\ConsistenceBundle\Twig\EnumTranslatorExtension
+        public: false
+        arguments:
+            $enumTranslator: '@mhujer_consistence.enum.enum_translator'
+        tags:
+            - { name: twig.extension }

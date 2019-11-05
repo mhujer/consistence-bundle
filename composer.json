@@ -24,7 +24,8 @@
 		"symfony/dependency-injection": "~4.3 || ~5.0",
 		"symfony/http-kernel": "~4.3 || ~5.0",
 		"symfony/translation-contracts": "~1.1",
-		"symfony/yaml": "~4.3 || ~5.0"
+		"symfony/yaml": "~4.3 || ~5.0",
+		"twig/twig": "~1.23 || ~2.12"
 	},
 	"require-dev": {
 		"consistence/coding-standard": "3.8",
