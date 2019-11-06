@@ -31,6 +31,8 @@ class MhujerConsistenceExtensionTest extends \Matthias\SymfonyDependencyInjectio
 
         $this->assertContainerBuilderHasService('mhujer_consistence.twig.enum_translator_runtime', EnumTranslatorRuntime::class);
         $this->assertContainerBuilderHasServiceDefinitionWithTag('mhujer_consistence.twig.enum_translator_runtime', 'twig.runtime');
+
+        $this->compile();
     }
 
 }
