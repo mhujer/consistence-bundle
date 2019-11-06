@@ -6,6 +6,7 @@
 
 		<!-- handled by SlevomatCodingStandard.TypeHints.TypeHintDeclaration -->
 		<exclude name="Squiz.Commenting.FunctionComment.MissingParamTag"/>
+		<exclude name="Squiz.Commenting.FunctionComment.ParamNameNoMatch"/>
 	</rule>
 	<rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
 		<properties>
