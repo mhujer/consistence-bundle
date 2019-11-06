@@ -99,24 +99,24 @@ In Twig templates you can use `transEnum` filter to convert an enum to a transla
 In forms, you can use `EnumType` as a field type. You need to set an option `enum_class` to an enum class:
 
 ```php
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder
-            ->add('cardColor', EnumType::class, [
-                'enum_class' => CardColor::class,
-                'label' => 'Card Color',
-            ])
-        //...
+public function buildForm(FormBuilderInterface $builder, array $options)
+{
+    $builder
+        ->add('cardColor', EnumType::class, [
+            'enum_class' => CardColor::class,
+            'label' => 'Card Color',
+        ])
+    //...
 ```
 
-Property in your [https://blog.martinhujer.cz/symfony-forms-with-request-objects/](request object) should look like this (it contains an instance of `CardColor`):
+Property in your [request object](https://blog.martinhujer.cz/symfony-forms-with-request-objects/) should look like this (it contains an instance of `CardColor`):
 
 ```php
-    /**
-     * @Assert\NotBlank()
-     * @var \App\Card\CardColor
-     */
-    public $cardColor;
+/**
+ * @Assert\NotBlank()
+ * @var \App\Card\CardColor
+ */
+public $cardColor;
 ```
 
 
