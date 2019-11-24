@@ -8,7 +8,7 @@ class EnumTranslatorExtension extends \Twig\Extension\AbstractExtension
 {
 
     /**
-     * @return \Twig_SimpleFilter[]
+     * @return \Twig\TwigFilter[]
      */
     public function getFilters(): array
     {
