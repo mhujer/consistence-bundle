@@ -134,5 +134,8 @@ Bugs and feature request are tracked on [GitHub](https://github.com/mhujer/consi
 
 # Changelog
 
+## 1.0.1 (2019-11-24)
+- Symfony 5 and Twig 3 compatibility
+
 ## 1.0.0 (2019-11-06)
 - initial release
