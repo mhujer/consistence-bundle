@@ -21,9 +21,6 @@ class MhujerConsistenceExtensionTest extends \Matthias\SymfonyDependencyInjectio
 
     public function testServicesAreRegistered(): void
     {
-        // workaround for https://github.com/SymfonyTest/SymfonyDependencyInjectionTest/pull/125
-        $this->container->getCompilerPassConfig()->setAfterRemovingPasses([]);
-
         $this->load();
 
         $this->assertContainerBuilderHasService('mhujer_consistence.enum.enum_translator', EnumTranslator::class);
