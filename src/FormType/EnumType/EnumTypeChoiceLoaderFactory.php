@@ -11,6 +11,9 @@ use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 class EnumTypeChoiceLoaderFactory
 {
 
+    /**
+     * @phpstan-param class-string $enumClassName
+     */
     public static function createLoader(string $enumClassName): ChoiceLoaderInterface
     {
         if (!is_subclass_of($enumClassName, Enum::class)) {
@@ -21,6 +24,7 @@ class EnumTypeChoiceLoaderFactory
             ));
         }
 
+        /** @var mixed[] $values */
         $values = $enumClassName::getAvailableValues();
 
         $values = ArrayType::mapByCallback($values, function (KeyValuePair $keyValuePair) use ($enumClassName) {
