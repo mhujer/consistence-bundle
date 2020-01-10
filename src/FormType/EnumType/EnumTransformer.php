@@ -27,7 +27,7 @@ class EnumTransformer implements \Symfony\Component\Form\DataTransformerInterfac
     /**
      * @param \Consistence\Enum\Enum|null $enum
      */
-    public function transform($enum): ?string // phpcs:ignore SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
+    public function transform($enum): ?string // phpcs:ignore SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
     {
         Type::checkType($enum, Enum::class . '|null');
 
@@ -41,7 +41,7 @@ class EnumTransformer implements \Symfony\Component\Form\DataTransformerInterfac
     /**
      * @param string|null $enumValue
      */
-    public function reverseTransform($enumValue): ?Enum // phpcs:ignore SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
+    public function reverseTransform($enumValue): ?Enum // phpcs:ignore SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
     {
         Type::checkType($enumValue, 'string|int|null');
 
