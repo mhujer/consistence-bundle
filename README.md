@@ -121,7 +121,7 @@ public $cardColor;
 
 
 # Requirements
-Works with PHP 7.4 or higher and Symfony 4.3 or higher.
+Works with PHP 7.4 or higher and Symfony 4.4 or higher.
 
 
 # Submitting bugs and feature requests
@@ -133,6 +133,10 @@ Bugs and feature request are tracked on [GitHub](https://github.com/mhujer/consi
 
 
 # Changelog
+
+## 1.1.0 (2021-02-28)
+- allow PHP 8.0
+- require PHP 7.4+
 
 ## 1.0.2 (2020-01-13)
 - Fixed [#3](https://github.com/mhujer/consistence-bundle/issues/3): _Undefined "translator" dependency in services.yaml_ 
