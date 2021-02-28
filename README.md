@@ -121,7 +121,7 @@ public $cardColor;
 
 
 # Requirements
-Works with PHP 7.2 or higher and Symfony 4.3 or higher.
+Works with PHP 7.4 or higher and Symfony 4.3 or higher.
 
 
 # Submitting bugs and feature requests
