@@ -94,6 +94,32 @@ In Twig templates you can use `transEnum` filter to convert an enum to a transla
 {{ variableContainingEnum | transEnum }}
 ```
 
+## Translation "namespaces"
+
+Sometimes it is useful to have different translations for the same enum (e.g. when the enum is used in admin and frontend UI). This is achieved by an `enumNamespace` parameter which can be passed to `transEnum`:
+
+```twig
+{{ variableContainingEnum | transEnum('frontend') }}
+```
+
+It will append the namespace to translation
+
+
+```php
+<?php declare(strict_types = 1);
+
+use App\Card\CardColor;
+
+return [
+    CardColor::class . ':' . CardColor::RED => 'red',
+    CardColor::class . ':' . CardColor::BLACK => 'black',
+    CardColor::class . ':frontend' . CardColor::RED => 'Red', // <--- this is a namespaced translation
+    CardColor::class . ':frontend' . CardColor::BLACK => 'Black', // <--- this is a namespaced translation
+];
+
+```
+
+
 ## Forms
 
 In forms, you can use `EnumType` as a field type. You need to set an option `enum_class` to an enum class:
@@ -133,6 +159,9 @@ Bugs and feature request are tracked on [GitHub](https://github.com/mhujer/consi
 
 
 # Changelog
+
+## 1.2.0 (2021-06-03)
+- add optional parameter `$enumNamespace` to `transEnum` method
 
 ## 1.1.0 (2021-02-28)
 - allow PHP 8.0

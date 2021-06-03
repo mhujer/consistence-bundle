@@ -18,9 +18,12 @@ class EnumTranslatorRuntime implements \Twig\Extension\RuntimeExtensionInterface
         $this->enumTranslator = $enumTranslator;
     }
 
-    public function translateEnum(Enum $enum): string
+    public function translateEnum(
+        Enum $enum,
+        ?string $enumNamespace = null
+    ): string
     {
-        return $this->enumTranslator->translateEnum($enum);
+        return $this->enumTranslator->translateEnum($enum, $enumNamespace);
     }
 
 }

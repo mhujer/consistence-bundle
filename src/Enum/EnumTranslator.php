@@ -19,13 +19,16 @@ class EnumTranslator
         $this->translator = $translator;
     }
 
-    public function translateEnum(Enum $enum): string
+    public function translateEnum(
+        Enum $enum,
+        ?string $enumNamespace = null
+    ): string
     {
         if ($enum instanceof MultiEnum) {
             throw new \Exception('Only single enums are supported for now.');
         }
 
-        $translateKey = get_class($enum) . ':' . $enum->getValue();
+        $translateKey = get_class($enum) . ($enumNamespace !== null ? ':' . $enumNamespace : '') . ':' . $enum->getValue();
 
         return $this->translator->trans($translateKey, [], 'enums');
     }
