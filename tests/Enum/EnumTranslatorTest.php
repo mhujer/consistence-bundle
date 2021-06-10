@@ -27,21 +27,19 @@ class EnumTranslatorTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testTranslateEnumWithSuffix(): void
+    public function testTranslateEnumWithTranslationDomain(): void
     {
         $mockTranslator = $this->createMock(TranslatorInterface::class);
-        $mockTranslator->method('trans')
-            ->willReturnArgument(0);
+        $mockTranslator->expects($this->once())
+            ->method('trans')
+            ->with('Mhujer\ConsistenceBundle\Fixtures\CardColor:red', [], 'enums-frontend')
+            ->will($this->returnValue('translated:Mhujer\ConsistenceBundle\Fixtures\CardColor:red'));
 
         $enumTranslator = new EnumTranslator($mockTranslator);
 
         self::assertSame(
-            'Mhujer\ConsistenceBundle\Fixtures\CardColor:frontend:red',
-            $enumTranslator->translateEnum(CardColor::get(CardColor::RED), 'frontend')
-        );
-        self::assertSame(
-            'Mhujer\ConsistenceBundle\Fixtures\CardColor:admin:black',
-            $enumTranslator->translateEnum(CardColor::get(CardColor::BLACK), 'admin')
+            'translated:Mhujer\ConsistenceBundle\Fixtures\CardColor:red',
+            $enumTranslator->translateEnum(CardColor::get(CardColor::RED), 'enums-frontend')
         );
     }
 

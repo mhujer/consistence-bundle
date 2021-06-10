@@ -20,10 +20,10 @@ class EnumTranslatorRuntime implements \Twig\Extension\RuntimeExtensionInterface
 
     public function translateEnum(
         Enum $enum,
-        ?string $enumNamespace = null
+        string $translationDomain = 'enums'
     ): string
     {
-        return $this->enumTranslator->translateEnum($enum, $enumNamespace);
+        return $this->enumTranslator->translateEnum($enum, $translationDomain);
     }
 
 }
