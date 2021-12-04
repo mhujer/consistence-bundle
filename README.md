@@ -159,6 +159,11 @@ Bugs and feature request are tracked on [GitHub](https://github.com/mhujer/consi
 
 # Changelog
 
+## 1.4.0 (2021-12-04)
+- require Symfony 5.4+
+- allow PHP 8.1
+- allow Symfony 6.0
+
 ## 1.3.0 (2021-06-10)
 - BC break: optional parameter in `transEnum` is treated as translation domain
 
