@@ -13,16 +13,17 @@ jobs:
                 symfony-version: [ '' ]
                 extra-label: [ '' ]
                 include:
-                    # SF 4.4 and 5.2
+                    # SF 5.4
                     -   php-versions: '7.4'
                         operating-system: ubuntu-latest
-                        symfony-version: '4.4.*'
-                        extra-label: 'SF 4.4'
+                        symfony-version: '5.4.*'
+                        extra-label: 'SF 5.4'
 
-                    -   php-versions: '7.4'
-                        operating-system: ubuntu-latest
-                        symfony-version: '5.2.*'
-                        extra-label: 'SF 5.2'
+                  # see https://github.com/laminas/laminas-code/issues/116
+                  #  -   php-versions: '8.1'
+                  #      operating-system: ubuntu-latest
+                  #      symfony-version: '5.4.*'
+                  #      extra-label: 'SF 5.4'
 
                     # Windows
                     -   php-versions: '7.4'
