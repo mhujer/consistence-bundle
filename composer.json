@@ -32,9 +32,9 @@
 		"consistence-community/coding-standard": "3.11.1",
 		"matthiasnoback/symfony-dependency-injection-test": "4.3.0",
 		"phpstan/extension-installer": "1.1.0",
-		"phpstan/phpstan-phpunit": "1.0.0",
-		"phpstan/phpstan": "1.2.0",
-		"phpunit/phpunit": "9.5.10"
+		"phpstan/phpstan-phpunit": "1.1.1",
+		"phpstan/phpstan": "1.8.5",
+		"phpunit/phpunit": "9.5.24"
 	},
 	"autoload": {
 		"psr-4": {
@@ -47,7 +47,11 @@
 		}
 	},
 	"config": {
-		"sort-packages": true
+		"sort-packages": true,
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"phpstan/extension-installer": true
+		}
 	},
 	"scripts": {
 		"build": [
