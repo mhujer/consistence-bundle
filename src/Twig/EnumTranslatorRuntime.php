@@ -19,7 +19,7 @@ class EnumTranslatorRuntime implements \Twig\Extension\RuntimeExtensionInterface
     }
 
     public function translateEnum(
-        Enum $enum,
+        Enum|\BackedEnum $enum,
         string $translationDomain = 'enums'
     ): string
     {

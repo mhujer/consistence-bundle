@@ -3,6 +3,7 @@
 namespace Mhujer\ConsistenceBundle\Enum;
 
 use Mhujer\ConsistenceBundle\Fixtures\CardColor;
+use Mhujer\ConsistenceBundle\Fixtures\CardColorNative;
 use Mhujer\ConsistenceBundle\Fixtures\RolesEnum;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -40,6 +41,40 @@ class EnumTranslatorTest extends \PHPUnit\Framework\TestCase
         self::assertSame(
             'translated:Mhujer\ConsistenceBundle\Fixtures\CardColor:red',
             $enumTranslator->translateEnum(CardColor::get(CardColor::RED), 'enums-frontend')
+        );
+    }
+
+    public function testTranslateNativeEnum(): void
+    {
+        $mockTranslator = $this->createMock(TranslatorInterface::class);
+        $mockTranslator->method('trans')
+            ->willReturnArgument(0);
+
+        $enumTranslator = new EnumTranslator($mockTranslator);
+
+        self::assertSame(
+            'Mhujer\ConsistenceBundle\Fixtures\CardColorNative:red',
+            $enumTranslator->translateEnum(CardColorNative::RED),
+        );
+        self::assertSame(
+            'Mhujer\ConsistenceBundle\Fixtures\CardColorNative:black',
+            $enumTranslator->translateEnum(CardColorNative::BLACK),
+        );
+    }
+
+    public function testTranslateNativeEnumWithTranslationDomain(): void
+    {
+        $mockTranslator = $this->createMock(TranslatorInterface::class);
+        $mockTranslator->expects($this->once())
+            ->method('trans')
+            ->with('Mhujer\ConsistenceBundle\Fixtures\CardColorNative:black', [], 'enums-frontend')
+            ->will($this->returnValue('translated:Mhujer\ConsistenceBundle\Fixtures\CardColorNative:black'));
+
+        $enumTranslator = new EnumTranslator($mockTranslator);
+
+        self::assertSame(
+            'translated:Mhujer\ConsistenceBundle\Fixtures\CardColorNative:black',
+            $enumTranslator->translateEnum(CardColorNative::BLACK, 'enums-frontend')
         );
     }
 

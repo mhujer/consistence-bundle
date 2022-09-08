@@ -15,33 +15,38 @@ class EnumTransformer implements \Symfony\Component\Form\DataTransformerInterfac
     {
         $this->enumClassName = $enumClassName;
 
-        if (!is_subclass_of($enumClassName, Enum::class)) {
+        if (!is_subclass_of($enumClassName, Enum::class) && !is_subclass_of($enumClassName, \BackedEnum::class)) {
             throw new \Exception(sprintf(
-                '"%s" is not a subclass of "%s"',
+                '"%s" is neither a subclass of "%s" or "%s"',
                 $enumClassName,
-                Enum::class
+                Enum::class,
+                \BackedEnum::class,
             ));
         }
     }
 
     /**
-     * @param \Consistence\Enum\Enum|null $enum
+     * @param \Consistence\Enum\Enum|\BackedEnum|null $enum
      */
     public function transform($enum): ?string // phpcs:ignore SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
     {
-        Type::checkType($enum, Enum::class . '|null');
+        Type::checkType($enum, Enum::class . '|' . \BackedEnum::class . '|null');
 
         if ($enum === null) {
             return null;
         }
 
-        return (string) $enum->getValue();
+        if ($enum instanceof Enum) {
+            return (string) $enum->getValue();
+        }
+
+        return (string) $enum->value;
     }
 
     /**
      * @param string|null $enumValue
      */
-    public function reverseTransform($enumValue): ?Enum // phpcs:ignore SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
+    public function reverseTransform($enumValue): Enum|\BackedEnum|null // phpcs:ignore SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
     {
         Type::checkType($enumValue, 'string|int|null');
 
@@ -51,7 +56,11 @@ class EnumTransformer implements \Symfony\Component\Form\DataTransformerInterfac
 
         $enumClass = $this->enumClassName;
 
-        return $enumClass::get($enumValue);
+        if (is_subclass_of($enumClass, Enum::class)) {
+            return $enumClass::get($enumValue);
+        }
+
+        return $enumClass::from($enumValue);
     }
 
 }

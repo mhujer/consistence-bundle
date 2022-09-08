@@ -20,7 +20,7 @@ class EnumTranslator
     }
 
     public function translateEnum(
-        Enum $enum,
+        Enum|\BackedEnum $enum,
         string $translationDomain = 'enums'
     ): string
     {
@@ -28,7 +28,13 @@ class EnumTranslator
             throw new \Exception('Only single enums are supported for now.');
         }
 
-        $translateKey = get_class($enum) . ':' . $enum->getValue();
+        if ($enum instanceof Enum) {
+            $translateKey = get_class($enum) . ':' . $enum->getValue();
+        } elseif ($enum instanceof \BackedEnum) {
+            $translateKey = get_class($enum) . ':' . (string) $enum->value;
+        } else {
+            throw new \Exception(sprintf('Unexpected enum class "%s"', get_class($enum)));
+        }
 
         return $this->translator->trans($translateKey, [], $translationDomain);
     }

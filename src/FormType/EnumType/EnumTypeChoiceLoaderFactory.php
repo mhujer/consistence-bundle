@@ -16,23 +16,41 @@ class EnumTypeChoiceLoaderFactory
      */
     public static function createLoader(string $enumClassName): ChoiceLoaderInterface
     {
-        if (!is_subclass_of($enumClassName, Enum::class)) {
+        if (!is_subclass_of($enumClassName, Enum::class) && !is_subclass_of($enumClassName, \BackedEnum::class)) {
             throw new \Exception(sprintf(
-                '"%s" is not a subclass of "%s"',
+                '"%s" is neither a subclass of "%s" or "%s"',
                 $enumClassName,
-                Enum::class
+                Enum::class,
+                \BackedEnum::class,
             ));
         }
 
-        /** @var mixed[] $values */
-        $values = $enumClassName::getAvailableValues();
+        if (is_subclass_of($enumClassName, Enum::class)) {
+            /** @var mixed[] $values */
+            $values = $enumClassName::getAvailableValues();
 
-        $values = ArrayType::mapByCallback($values, function (KeyValuePair $keyValuePair) use ($enumClassName) {
-            return new KeyValuePair(
-                $enumClassName . ':' . $keyValuePair->getValue(),
-                $keyValuePair->getValue()
-            );
-        });
+            $values = ArrayType::mapByCallback($values, function (KeyValuePair $keyValuePair) use ($enumClassName) {
+                return new KeyValuePair(
+                    $enumClassName . ':' . $keyValuePair->getValue(),
+                    $keyValuePair->getValue()
+                );
+            });
+        } elseif (is_subclass_of($enumClassName, \BackedEnum::class)) {
+            /** @var \UnitEnum[] $values */
+            $values = $enumClassName::cases();
+
+            $values = ArrayType::mapByCallback($values, function (KeyValuePair $keyValuePair) use ($enumClassName) {
+                /** @var \BackedEnum $enum */
+                $enum = $keyValuePair->getValue();
+
+                return new KeyValuePair(
+                    $enumClassName . ':' . $enum->value,
+                    $enum->value,
+                );
+            });
+        } else {
+            throw new \Exception(sprintf('Unexpected enum class "%s"', $enumClassName));
+        }
 
         return new CallbackChoiceLoader(function () use ($values) {
             return $values;

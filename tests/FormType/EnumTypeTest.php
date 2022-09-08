@@ -3,6 +3,7 @@
 namespace Mhujer\ConsistenceBundle\FormType;
 
 use Mhujer\ConsistenceBundle\Fixtures\CardColor;
+use Mhujer\ConsistenceBundle\Fixtures\CardColorNative;
 
 class EnumTypeTest extends \Symfony\Component\Form\Test\TypeTestCase
 {
@@ -43,6 +44,41 @@ class EnumTypeTest extends \Symfony\Component\Form\Test\TypeTestCase
         $enumFromForm = $formElement->getData();
         self::assertInstanceOf(CardColor::class, $enumFromForm);
         self::assertSame(CardColor::RED, $enumFromForm->getValue());
+    }
+
+    public function testSubmitValidDataNativeEnum(): void
+    {
+        $formElement = $this->factory->create(EnumType::class, null, [
+            'enum_class' => CardColorNative::class,
+        ]);
+
+        $formElement->submit('red');
+
+        $this->assertTrue($formElement->isSynchronized());
+
+        /** @var \Mhujer\ConsistenceBundle\Fixtures\CardColorNative $enumFromForm */
+        $enumFromForm = $formElement->getData();
+        self::assertSame(CardColorNative::RED, $enumFromForm);
+    }
+
+    public function testUpdateWithDataNativeEnum(): void
+    {
+        $formElement = $this->factory->create(EnumType::class, CardColorNative::BLACK, [
+            'enum_class' => CardColorNative::class,
+        ]);
+
+        /** @var \Mhujer\ConsistenceBundle\Fixtures\CardColorNative $enumFromForm */
+        $enumFromForm = $formElement->getData();
+        self::assertSame(CardColorNative::BLACK, $enumFromForm);
+
+        // submit form
+        $formElement->submit('red');
+
+        $this->assertTrue($formElement->isSynchronized());
+
+        /** @var \Mhujer\ConsistenceBundle\Fixtures\CardColorNative $enumFromForm */
+        $enumFromForm = $formElement->getData();
+        self::assertSame(CardColorNative::RED, $enumFromForm);
     }
 
 }
