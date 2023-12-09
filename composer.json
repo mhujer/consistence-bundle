@@ -30,11 +30,11 @@
 	},
 	"require-dev": {
 		"consistence-community/coding-standard": "3.11.2",
-		"matthiasnoback/symfony-dependency-injection-test": "4.3.0",
+		"matthiasnoback/symfony-dependency-injection-test": "^5.0",
 		"phpstan/extension-installer": "1.1.0",
 		"phpstan/phpstan-phpunit": "1.1.1",
 		"phpstan/phpstan": "1.8.5",
-		"phpunit/phpunit": "9.5.24"
+		"phpunit/phpunit": "^10.0"
 	},
 	"autoload": {
 		"psr-4": {
