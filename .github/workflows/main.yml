@@ -23,7 +23,12 @@ jobs:
                         operating-system: windows-latest
                         coverage: xdebug
 
-                    -   php-versions: ['8.2', '8.3']
+                    -   php-versions: '8.2'
+                        operating-system: ubuntu-latest
+                        symfony-version: '7.0.*'
+                        extra-label: 'SF 7.0'
+
+                    -   php-versions: '8.3'
                         operating-system: ubuntu-latest
                         symfony-version: '7.0.*'
                         extra-label: 'SF 7.0'
