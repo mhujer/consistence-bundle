@@ -159,6 +159,9 @@ Bugs and feature request are tracked on [GitHub](https://github.com/mhujer/consi
 
 # Changelog
 
+## 2.0.1 (2023-12-09)
+- add Symfony 7 and PHP 8.2 support (dfridrich)
+
 ## 2.0.0 (2022-09-20)
 - require PHP 8.1
 - add support for native enums to make migration easier
